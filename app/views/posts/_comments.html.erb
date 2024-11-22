@@ -1,0 +1,6 @@
+<% @post.comments.each do |comment| %>
+  <div>
+    <p><%= comment.user.name %>: <%= comment.content %></p>
+    <%= link_to '削除', post_comment_path(@post, comment), method: :delete, data: { confirm: 'このコメントを削除しますか？' } %>
+  </div>
+<% end %>

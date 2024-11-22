@@ -1,2 +1,65 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<div class="container mt-5">
+  <!-- 投稿タイトル -->
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center mb-4"><%= @post.title %></h1>
+    </div>
+  </div>
+
+  <!-- 投稿内容 -->
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <!-- 投稿画像 -->
+      <% if @post.image.attached? %>
+        <div class="text-center mb-4">
+          <%= image_tag @post.image, class: "img-fluid rounded" %>
+        </div>
+      <% end %>
+      
+      <!-- 投稿本文 -->
+      <p class="lead"><%= @post.content %></p>
+    </div>
+  </div>
+
+  <hr class="my-5">
+
+  <!-- コメントフォーム -->
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="mb-4">コメントを投稿</h2>
+      <%= form_with(model: [@post, Comment.new], local: true, class: "form") do |form| %>
+        <div class="mb-3">
+          <%= form.label :content, "コメント", class: "form-label" %>
+          <%= form.text_area :content, rows: 3, class: "form-control" %>
+        </div>
+        <div>
+          <%= form.submit "コメントを投稿", class: "btn btn-primary w-100" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <hr class="my-5">
+
+  <!-- コメント一覧 -->
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h3 class="mb-4">コメント一覧</h3>
+      <% if @comments.any? %>
+        <% @comments.each do |comment| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <p class="mb-1"><strong><%= comment.user.name %></strong></p>
+              <p><%= comment.content %></p>
+              <% if comment.user == current_user %>
+                <%= button_to '削除', post_comment_path(@post, comment), method: :delete, data: { confirm: 'このコメントを削除しますか？' }, class: "btn btn-danger btn-sm" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted">まだコメントはありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>

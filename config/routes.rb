@@ -1,5 +1,4 @@
-Rails.application.routes.draw do
-  # config/routes.rb
+# config/routes.rb
 
 Rails.application.routes.draw do
   # トップページとアバウトページ
@@ -9,17 +8,14 @@ Rails.application.routes.draw do
   # Deviseのルーティング（ユーザー認証）
   devise_for :users
 
-  # ユーザー関連
+  # ユーザー関連（mypage_pathがusers#showに対応）
   resources :users, only: [:show, :edit, :update, :destroy]
-  get '/users/:id/mypage', to: 'users#mypage', as: 'mypage'
+  get '/mypage', to: 'users#show', as: 'mypage'
 
   # 投稿関連
   resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
-    resources :comments, only: [:index, :new, :create]
+    resources :comments, only: [:index, :new, :create, :destroy]
   end
-
-  # コメント関連
-  resources :comments, only: [:edit, :update, :destroy]
 
   # グループ関連
   resources :groups, only: [] do
@@ -33,7 +29,4 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy]
     resources :comments, only: [:index, :show, :destroy]
   end
-end
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
