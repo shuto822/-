@@ -1,2 +1,19 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h2>ユーザー情報編集</h2>
+
+<%= form_for(@user, html: { method: :patch }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: @user %>
+
+  <div class="field">
+    <%= f.label :name, "名前" %><br />
+    <%= f.text_field :name, value: @user.name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, value: @user.email %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "更新する" %>
+  </div>
+<% end %>
