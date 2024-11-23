@@ -1,15 +1,36 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* 親コンテナ */
+.top-banner {
+  position: relative; /* 画像と文字を重ねるために relative を指定 */
+  width: 100%; /* 必要に応じて幅を調整 */
+  height: auto; /* 必要に応じて高さを調整 */
+}
+
+/* 画像 */
+.banner-image {
+  width: 100%; /* 画像を横幅いっぱいに設定 */
+  height: auto; /* アスペクト比を維持 */
+  display: block; /* 必要に応じて余白を除去 */
+}
+
+/* 重ねる文字 */
+.banner-text {
+  position: absolute; /* 親要素(top-banner)の中で絶対配置 */
+  top: 50%; /* 縦方向中央揃え */
+  left: 50%; /* 横方向中央揃え */
+  transform: translate(-50%, -50%); /* 完全に中央に配置 */
+  color: white; /* テキストカラーを白に設定 */
+  text-align: center; /* テキストを中央揃え */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 文字に影をつけて読みやすくする */
+  background: rgba(0, 0, 0, 0.5); /* 背景色を半透明で追加（視認性向上用） */
+  padding: 10px; /* テキスト周りの余白を調整 */
+  border-radius: 5px; /* デザインの角を丸く */
+}
+
+.banner-text h2 {
+  font-size: 2.5rem; /* 必要に応じてフォントサイズを調整 */
+}
+
+.banner-text p {
+  font-size: 1.25rem;
+  margin-top: 10px;
+}
