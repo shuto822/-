@@ -48,7 +48,7 @@ class PostsController < ApplicationController
       @post.destroy
       redirect_to posts_path, notice: "投稿を削除しました"
     else
-      redirect_to posts_path, alert: "あなたはこの投稿を削除できません"
+      redirect_to post_path(@post), alert: '削除する権限がありません。'
     end
   end
 
