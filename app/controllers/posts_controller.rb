@@ -8,7 +8,8 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to posts_path, notice: "投稿を作成しました"
+      # 投稿作成成功後に詳細ページへリダイレクト
+      redirect_to post_path(@post), notice: "投稿を作成しました"
     else
       render :new
     end
