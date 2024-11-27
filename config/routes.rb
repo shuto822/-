@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # ユーザー関連（mypage_pathがusers#showに対応）
   resources :users, only: [:show, :edit, :update, :destroy]
-  get '/mypage', to: 'users#show', as: 'mypage'
+  get '/mypage', to: 'users#mypage', as: 'mypage'
 
   # 投稿関連
   resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy] do

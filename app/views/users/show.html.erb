@@ -1,5 +1,30 @@
-<h1><%= current_user.name %>さんのマイページ</h1>
+<div class="container mt-5">
+  <h1 class="mb-4 text-center"><%= current_user.name %>さんのマイページ</h1>
 
-<p>メールアドレス: <%= current_user.email %></p>
-<%= link_to 'プロフィールを編集', edit_user_path(current_user) %> |
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h2 class="mb-0">投稿一覧</h2>
+    </div>
+    <div class="card-body">
+      <% if current_user.posts.any? %>
+        <ul class="list-unstyled">
+          <% current_user.posts.each do |post| %>
+            <li class="mb-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <%= link_to post.title, post_path(post), class: "h5 text-decoration-none text-dark" %>
+                <small class="text-muted"><%= time_ago_in_words(post.created_at) %> 前</small>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-center">まだ投稿はありません。</p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3">
+    <%= link_to 'プロフィールを編集', edit_user_path(current_user), class: "btn btn-primary me-2" %>
+    <%= link_to '退会する', user_path(current_user), method: :delete, data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" %>
+  </div>
+</div>
