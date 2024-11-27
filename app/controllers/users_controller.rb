@@ -18,8 +18,14 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts
+  end
+
   def mypage
     @user = current_user
+    @posts = @user.posts
   end
 
   def edit
@@ -37,7 +43,13 @@ class UsersController < ApplicationController
 
   def destroy
     @user = current_user
+    # 関連する投稿とコメントを削除
+    @user.posts.destroy_all
+    @user.comments.destroy_all
+    
+    # ユーザーを削除
     @user.destroy
+    
     redirect_to root_path, notice: "アカウントを削除しました"
   end
 
@@ -45,5 +57,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def ensure_correct_user
+    user = User.find(params[:id])
+    unless user == current_user
+      redirect_to mypage_path, alert: "不正なアクセスです。"
+    end
   end
 end

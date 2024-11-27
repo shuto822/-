@@ -6,6 +6,16 @@
     </div>
   </div>
 
+  <!-- 投稿者の名前 -->
+  <div class="row">
+    <div class="col-md-8 offset-md-2 text-center">
+      <p>
+        投稿者: 
+        <%= link_to @post.user.name, user_path(@post.user), class: "text-primary fw-bold" %>
+      </p>
+    </div>
+  </div>
+
   <!-- 投稿内容 -->
   <div class="row">
     <div class="col-md-8 offset-md-2">
