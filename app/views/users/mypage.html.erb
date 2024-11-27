@@ -16,7 +16,7 @@
 
           <div class="d-flex justify-content-between">
             <%= link_to 'プロフィールを編集', edit_user_path(current_user), class: 'btn btn-warning' %>
-            <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            <%= link_to '退会する', user_path(current_user), method: :delete, data: { confirm: '本当に退会しますか？' }, class: "btn btn-danger" %>
           </div>
         </div>
       </div>
