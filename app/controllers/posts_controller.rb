@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
+    Rails.logger.debug "DEBUG: @post.user = #{@post.user.inspect}"
   end
 
   def edit
