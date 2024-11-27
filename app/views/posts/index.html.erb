@@ -21,8 +21,11 @@
         </h2>
         <p class="card-text"><%= truncate(post.content, length: 100) %></p>
         <div class="d-flex justify-content-between">
-          <%= link_to '編集', edit_post_path(post), class: "btn btn-warning btn-sm" %>
-          <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+          <!-- 自分の投稿のみ編集と削除リンクを表示 -->
+          <% if post.user == current_user %>
+            <%= link_to '編集', edit_post_path(post), class: "btn btn-warning btn-sm" %>
+            <%= link_to '削除', post_path(post), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: "btn btn-danger btn-sm" %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -33,4 +36,3 @@
     <%= link_to '新しい投稿を作成', new_post_path, class: "btn btn-success" %>
   </div>
 </div>
-
